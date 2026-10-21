@@ -1,0 +1,58 @@
+JOYBRIDGE 0.1 - Windows 10/11 x64 - experimental hardware build
+
+1. Install with JoyBridge-Setup.exe and open JoyBridge.
+2. Turn on your PC's Bluetooth. Hold the small SYNC button on each
+   original Switch Joy-Con's inner rail until its lights chase.
+3. Click Pair Joy-Cons. Allow about 10 seconds per Bluetooth radio.
+   The app attempts to enable the Windows Bluetooth HID service for
+   discovered Joy-Con (L)/(R) devices. This is adapter/Windows dependent.
+   If that fails, click Bluetooth settings > Add device > Bluetooth,
+   select Joy-Con (L), repeat for (R). No PIN should be required.
+4. Wait for the device count to increase. A combined pair can count as ONE.
+5. Choose Gaming or Desktop preset. Edit dropdowns as needed. Save profile.
+6. Click Enable mapping, then switch to your game/app. Keep JoyBridge open.
+   Minimize it if desired. F8 toggles mapping; F9 pauses and releases keys.
+
+GAMING DEFAULTS
+Left stick: WASD. Right stick: mouse. ZR: left click. ZL: right click.
+B (south): Space. A (east): E. Y (west): R. X (north): F.
+L: Q. R: E. Minus: Tab. Plus: Escape. Left click-stick: Shift.
+Right click-stick: C. D-pad: arrows. Home: unbound.
+
+DESKTOP DEFAULTS
+Left stick: arrows. Right stick: mouse. Y: left click. X: right click.
+B: Enter. A: Escape. Plus: Space. Other bindings follow Gaming.
+
+Right-stick pointer movement is always active when mapping is enabled;
+its optional directional key bindings are additional outputs.
+Profiles save to %LOCALAPPDATA%\JoyBridge\profile.ini.
+Presets are applied in memory; Save profile makes them persistent.
+On launch, mapping starts paused. Closing, disconnecting or suspending
+releases keys on the next input tick. Multiple inputs using the same key
+stay held until all are released. Closing during a Bluetooth scan waits
+for that scan to finish. No startup task, telemetry or network dependency.
+
+SCOPE AND LIMITS
+Original Nintendo Switch Joy-Cons only; Joy-Con 2 and clones not verified.
+Bluetooth radio required. You must physically enter pairing mode.
+Automatic reconnect depends on Windows; press a controller button to wake.
+If stale pairing fails, remove that Joy-Con in Windows settings and re-pair.
+This is keyboard/mouse emulation, NOT an Xbox/XInput virtual controller.
+Games must support keyboard/mouse. No gyro, rumble or SL/SR binding in v0.1.
+No background service, driver install, controller hiding, or macros.
+Close Steam Input, reWASD and other mappers to avoid conflicting outputs.
+Mapping pauses when JoyBridge itself is foreground to allow safe editing.
+Windows can block SendInput into elevated apps; use a normal privilege
+level game or run both at the same privilege level only when necessary.
+Protected games may reject synthetic input; no bypass is provided.
+Global hotkeys can be claimed by other apps; Pause mapping also works.
+The app and installer are unsigned, so Windows may show a publisher warning.
+Only run this build if you trust its included source. Do not disable security.
+
+VALIDATION
+Cross-compiled on Linux. PE architecture/imports checked. Bluetooth pairing,
+Joy-Con input, installer UI and SendInput have NOT been run on Windows hardware.
+This is a functional implementation for testing, not a verified reWASD replacement.
+
+Uninstall from Windows Installed apps or the Start menu. Your profile is
+retained; delete %LOCALAPPDATA%\JoyBridge if you want to remove it too.

@@ -1,0 +1,21 @@
+{
+  "status": "build-verified-only",
+  "checks": [
+    "x64 application and SDL",
+    "installer PE",
+    "application imports",
+    "licenses and quick start"
+  ],
+  "sha256": {
+    "dist/JoyBridge.exe": "6a7a0e18902ccf359ae3be19d265890243e3d415ec9e0cbe1927a442148fd8a7",
+    "dist/SDL2.dll": "53e8fa7e9ed43c30bd650c39396f0d9d2067d2fff0b926c9433b75202592e4aa",
+    "JoyBridge-Setup.exe": "e410f4e26c17a2a88a1d7fb545aa7d422b9f9d0932ca4a72b9939b91020af296"
+  },
+  "not_tested": [
+    "Windows execution",
+    "installer interaction",
+    "Bluetooth pairing",
+    "physical Joy-Con input",
+    "game compatibility"
+  ]
+}

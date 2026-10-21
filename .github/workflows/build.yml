@@ -1,0 +1,35 @@
+name: Build experimental Windows prototype
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  cross-build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Install cross-build tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc-mingw-w64-x86-64 nsis python3
+      - name: Fetch pinned SDL
+        run: python3 scripts/fetch_sdl.py
+      - name: Build and analyze
+        run: bash build.sh
+      - name: Verify package contracts
+        run: python3 scripts/verify_build.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: JoyBridge-Windows-x64-experimental-unsigned
+          if-no-files-found: error
+          retention-days: 30
+          path: |
+            JoyBridge-Setup.exe
+            dist/Quick-Start.txt
+            dist/LICENSE.txt
+            dist/LICENSE-SDL.txt
+            dist/build-verification.json

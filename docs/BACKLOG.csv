@@ -1,0 +1,41 @@
+ID,Priority,Milestone,Feature,Scope,Acceptance
+JB-001,P0,M0,Windows hardware baseline,Run install/input/uninstall test matrix,Named hardware report with pass/fail evidence
+JB-002,P0,M0,Output error handling,Track injection failures and neutralization,Failed sends visible; shared holds and disconnect regression tests
+JB-003,P0,M0,Settings and hotkey reliability,Atomic writes and hotkey registration feedback,Failed persistence/conflicting hotkey visible
+JB-004,P0,M1,Extract portable engine,Separate device and mapping state from Win32 GUI,Core tests run without window/Bluetooth
+JB-005,P0,M1,Sensor capabilities and recorder,Enable supported gyro/accel with timestamps,Both hands recorded with units and no stale timestamps
+JB-006,P0,M1,Calibration and neutral pose,Bias plus grip calibration per device,Motion rejected during calibration; replay passes
+JB-007,P0,M1,Gyro mouse and clutch,Relative right/left gyro mouse with explicit enable,Pause/disconnect flush; sample-rate invariance tests
+JB-008,P1,M1,Motion diagnostics,"Show timing, bias, output and live orientation",Signals agree with recorded traces
+JB-009,P1,M1,Aim tuning wizard,Guided in-game gain/axis setup,Profile records exact gain and game assumptions
+JB-010,P0,M2,Physical identity and roles,Stable assignments with explicit identification,Reversed reconnect order preserves roles
+JB-011,P0,M2,Independent pair/single rigs,Choose pairs or sideways singles,Two rigs have independent state
+JB-012,P0,M2,Output arbitration,Contribution ownership and pointer ownership,No cross-player holds or competing cursors
+JB-013,P1,M2,Profiles and app matching,Versioned data-only profiles with profile lock,Focus switch clears old outputs; unknown matches previewed
+JB-014,P1,M2,Layers and activators,Tap/hold/double-tap and modifier layers,No ambiguous duplicate firing; accessible escape
+JB-015,P1,M2,Full button adapter,Expose SL/SR/Capture where backend supports,Physical-side mapping tests; unsupported fields disabled
+JB-016,P1,M2,Tilt steering and dial,Neutral-relative angle to bounded axis,Neutral reset and stale-sample tests
+JB-017,P1,M2,Flick stick,Calibrated heading turns plus gyro,Per-game full-turn test; source attribution
+JB-018,P1,M2,Gated gestures,Small deterministic gesture set,Negative traces and false-positive results published
+JB-019,P0,M3,Virtual-backend decision,Evaluate maintained distributable Windows options,"Document signing, capacity, compatibility and maintenance"
+JB-020,P0,M3,Independent virtual slots,Route rigs to supported player slots,Two-player game verified; no slot swaps
+JB-021,P1,M3,Rumble routing,Return slot rumble to correct physical hands,Disconnect/stop terminates rumble
+JB-022,P1,M3,Conflict diagnostics,Identify competing input tools,Explain conflict without changing unrelated settings
+JB-023,P1,M3,DSU motion output,Implement tested consumer protocol,Packet/unit/timestamp fixtures and emulator test
+JB-024,P1,M4,OBS adapter,Named scene/mute/parameter commands,Authenticated local connection; acknowledgement-based feedback
+JB-025,P1,M4,Blender add-on,Clutched orbit/pan/zoom,Versioned app test and clean unload
+JB-026,P1,M4,Video editor recipe,Scrub/markers/undo with normal mouse,Ten-minute task without unintended edit
+JB-027,P2,M4,MIDI/OSC adapters,Motion to parameters/notes,"Rate limits, units and explicit destination tests"
+JB-028,P2,M4,Haptic detents,Bounded ticks for acknowledged parameter steps,No haptics during calibration; intensity limit
+JB-029,P1,M5,Accessible onboarding,"Keyboard navigation, labels, one-handed options",Usability sessions and keyboard-only pass
+JB-030,P1,M5,Trusted profile catalogue,Evidence labels and versioned manifests,Every tested label links reproducible evidence
+JB-031,P1,M5,Signing and updates,Legitimate signed distribution and rollback,Clean install/upgrade/recovery evidence
+JB-032,P1,M5,Device capacity matrix,"Test 2,4 then 8 physical controllers",Adapter-specific latency/drop data; no universal cap claim
+JB-033,P2,M6,Linux adapter,Input permissions and supported output paths,Distro/desktop test matrix
+JB-034,P2,M6,macOS adapter,"Permissions, signing and desktop output",Platform-specific test matrix
+JB-035,P3,Research,Right IR experiment,Read-only short-range experiment,Measured demo with lighting/bandwidth limitations
+JB-036,P3,Research,NFC feasibility,Supported-tag read-only study,Protocol/tag evidence before UX promise
+JB-037,P3,Research,Accessory support,Evaluate Ring-Con/other accessories,Separate hardware/protocol validation
+JB-038,P2,Later,Local gesture recording,Personal examples plus negatives,False-trigger evaluation and rollback
+JB-039,P2,Later,Profile sharing convenience,Optional sync beyond offline core,No account requirement for basic operation
+JB-040,P2,Later,Joy-Con 2 study,Separate generation-specific support plan,No inherited original-Joy-Con support claims

@@ -1,0 +1,17 @@
+{
+  "app_type": "JoyBridge/dist/JoyBridge.exe: PE32+ executable (GUI) x86-64, for MS Windows, 19 sections",
+  "installer_type": "JoyBridge/JoyBridge-Setup.exe: PE32 executable (GUI) Intel 80386 (stripped to external PDB), for MS Windows, Nullsoft Installer self-extracting archive, 7 sections",
+  "checks": [
+    "MinGW GCC compile: -Wall -Wextra -Werror passed",
+    "GCC static analyzer passed",
+    "NSIS installer compilation passed",
+    "x64 app + x64 SDL DLL verified",
+    "Imports checked: SDL2 supplied; remaining imports are Windows libraries"
+  ],
+  "not_tested": [
+    "Windows execution / installer UI",
+    "Joy-Con Bluetooth pairing and reconnect",
+    "Physical button and stick input",
+    "Keyboard/mouse injection in games"
+  ]
+}
