@@ -16,6 +16,10 @@ JoyBridge is an independent Joy-Con project starting with a small Windows keyboa
 
 The four-entry device array is **not four-player support**. All detected controllers currently contribute to the same desktop keyboard/mouse output. SYNC mode still requires the physical controller button. Joy-Con 2, third-party clones, motion, and SL/SR/Capture mappings are not supported/verified by this prototype.
 
+## Android motion experiment
+
+A separate [Android Motion Lab](experiments/android-motion/README.md) now implements a Joy-Con sensor-to-emulator bridge. Its transport and validation tests pass; real Windows hardware, Android sensor delivery, and Just Dance Now compatibility remain **unverified**. It is separate from the keyboard/mouse installer. Download its Windows executable from the **Build Android motion lab** Actions workflow after a successful run.
+
 ## Product plan
 
 Start with [the product blueprint](docs/PRODUCT_BLUEPRINT.md). It explains the opportunities, hardware limits, priorities, and why simply copying gyro/flick-stick features will not differentiate this project.

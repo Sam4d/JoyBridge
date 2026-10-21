@@ -1,0 +1,43 @@
+name: Build Android motion lab
+on:
+  push:
+    branches: [main]
+    paths: ['experiments/android-motion/**', '.github/workflows/motion-lab.yml', 'scripts/fetch_sdl.py']
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  windows-lab:
+    runs-on: windows-2022
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test transport and sensor transforms
+        run: python -m unittest discover -s experiments/android-motion -v
+      - name: Fetch checksum-pinned SDL
+        run: python scripts/fetch_sdl.py
+      - name: Package experimental executable
+        shell: pwsh
+        run: |
+          python -m pip install pyinstaller==6.16.0
+          python -m PyInstaller --clean --noconfirm --onefile --console --name JoyBridge-Motion-Lab --add-binary "vendor/SDL2-2.32.10/x86_64-w64-mingw32/bin/SDL2.dll;." experiments/android-motion/bridge.py
+          Copy-Item experiments/android-motion/README.md dist/Motion-Lab-Readme.md
+          Copy-Item experiments/android-motion/Start-Motion-Bridge.cmd dist/
+          Copy-Item LICENSE dist/LICENSE.txt
+          Copy-Item vendor/SDL2-2.32.10/LICENSE.txt dist/LICENSE-SDL.txt
+          dist/JoyBridge-Motion-Lab.exe --help
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: JoyBridge-Android-Motion-Lab-Windows-x64-unsigned
+          if-no-files-found: error
+          path: |
+            dist/JoyBridge-Motion-Lab.exe
+            dist/Motion-Lab-Readme.md
+            dist/Start-Motion-Bridge.cmd
+            dist/LICENSE.txt
+            dist/LICENSE-SDL.txt
