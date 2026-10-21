@@ -171,6 +171,7 @@ def main(argv=None):
     parser.add_argument('--token-file', default=str(Path.home() / '.emulator_console_auth_token'))
     parser.add_argument('--axes', type=axes, default=axes('x,y,z'), help='Phone x,y,z from SDL axes; identity is UNCALIBRATED')
     parser.add_argument('--hz', type=int, default=60, choices=range(10, 121), metavar='10..120')
+    parser.add_argument('--stop-file', help='Exit cleanly when this file appears (used by the launcher)')
     args = parser.parse_args(argv)
     if not 5554 <= args.port <= 5584 or args.port % 2:
         parser.error('--port must be an even emulator console port from 5554 to 5584')
@@ -214,6 +215,9 @@ def main(argv=None):
         count, report = 0, time.monotonic()
         streaming = True
         while True:
+            if args.stop_file and Path(args.stop_file).exists():
+                print('Stopped by launcher.')
+                return 0
             started = time.monotonic()
             sdl.pump()
             if not sdl.lib.SDL_GameControllerGetAttached(controller):

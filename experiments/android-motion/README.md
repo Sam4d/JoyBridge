@@ -6,15 +6,25 @@ A real sensor bridge, not yet a verified Just Dance Now controller. Pair an orig
 
 **Not verified:** Windows Bluetooth capture, Android guest sensor delivery, app installation/login, Just Dance Now motion/scoring, grip orientation, latency, or multiplayer. No Android SDK/emulator, KVM, Bluetooth hardware or Joy-Con is present in the development workspace. Automated tests use a mock console, not a running Android instance. Do not interpret a successful build or an `OK` from the emulator as evidence of game compatibility.
 
-## Windows setup
+## Guided Windows setup (no Android Studio)
 
-1. Install [Android Studio](https://developer.android.com/studio) and its Android Emulator through the normal installer. Enable the virtualization support requested by Android Studio. Android/SDK components are not included in our download.
-2. In Device Manager, create a phone AVD with a **Google Play** system image compatible with your PC. Start it. Confirm the phone boots and Play Store works. A Play image is only a candidate, not a guarantee the game is available or works.
-3. Use Play Store inside the AVD to look for Ubisoft's **Just Dance Now**, not the separate console Controller app. If unavailable/incompatible, record that result; don't use random APK mirrors or conceal emulator identity. Sign in yourself as needed. No credentials are handled by this bridge.
-4. Pair one original Joy-Con in Windows Bluetooth settings (hold its physical SYNC button until its LEDs chase). Keep it in your right hand using its wrist strap for the dance test.
-5. Download and extract the artifact from the repository's **Build Android motion lab** Actions workflow. Run `Start-Motion-Bridge.cmd`. It queries emulator sensors, lists Joy-Cons, asks for an index, then streams. The executable is unsigned. First-time Android setup and physical pairing are not one-click operations.
-6. Before opening a game, inspect accelerometer and gyroscope events in an Android sensor viewer you trust, or your own SensorManager test app. A stationary controller should show about 9.81 m/s² total acceleration and near-zero angular velocity. Confirm axes with deliberate rotations in each direction. Console readback alone does not prove app-level delivery.
-7. Only after the sensor test passes, open https://justdancenow.com/ in your PC browser. Use the official Android app to join that room. Test a song through the normal service. Record whether actual movement changes scoring compared with a stationary controller, and whether pairing, room join and reconnect succeed.
+Download **JoyBridge-Dance-Lab-Setup.exe** from the successful Build Android motion lab workflow's installer artifact. Install and open **JoyBridge Dance Lab** from the desktop shortcut. It guides you through:
+
+1. **Prepare**: review Google's actual license text, then download Android directly from Google. About 2.2 GB download at the time of implementation; 16 GB free space required. The GUI checks sizes/checksums and creates a private virtual phone. No Android Studio, Java, Python, command prompt or manual AVD creation is required.
+2. **Bluetooth settings**: hold the Joy-Con's physical SYNC button, then choose Add device in Windows. Pairing still requires that physical step.
+3. **Start phone**: the app checks hardware acceleration and starts the virtual phone. If Windows needs virtualization enabled, Help explains Windows Hypervisor Platform and firmware checks. Enabling a Windows feature can require administrator approval and a restart; this is not automated or bypassed.
+4. Sign into Google Play yourself **inside the phone window** and install Ubisoft's **Just Dance Now** if available. Availability and game compatibility remain unverified.
+5. **Find Joy-Cons**, select one, then **Start motion**. **Open dance screen** opens the game website. Join its room from the phone app. **Stop motion** stops the bridge cleanly.
+
+The GUI's default grip axes are experimental. Before scoring tests, verify real sensor delivery in an Android sensor viewer. A stationary controller should measure about 9.81 m/s² total acceleration and near-zero angular velocity. Full beginner calibration is not implemented yet. This installer simplifies the setup workflow; it does not establish working Just Dance Now support.
+
+Supported packaging target: Intel/AMD Windows x64. Downloads, account sign-in, firmware changes and phone boot remain real prerequisites. The GUI uses a dedicated emulator console port 5580. The advanced command-line bridge defaults to 5554.
+
+State is under `%LOCALAPPDATA%\JoyBridge\DanceLab`. Diagnostics opens that directory. Closing the launcher requests a clean motion stop; close the phone window separately. Uninstall preserves the virtual phone and account data and tells you where to remove them. Google's terms are shown for explicit acceptance; components are downloaded by the user, not redistributed inside the installer.
+
+## Advanced standalone use
+
+The original `Start-Motion-Bridge.cmd` launcher remains available for an already-running emulator on port 5554. The GUI is the recommended entry point for beginners.
 
 Press **Ctrl+C** to stop. A disconnected/stale controller stops the bridge instead of silently switching players. Reconnect and relaunch explicitly. If the console connection is lost, resetting virtual sensors may be impossible; restart the AVD before continuing. Force-killing the process also bypasses cleanup.
 

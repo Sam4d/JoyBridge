@@ -25,6 +25,10 @@ jobs:
         run: |
           python -m pip install pyinstaller==6.16.0
           python -m PyInstaller --clean --noconfirm --onefile --console --name JoyBridge-Motion-Lab --add-binary "vendor/SDL2-2.32.10/x86_64-w64-mingw32/bin/SDL2.dll;." experiments/android-motion/bridge.py
+          python -m PyInstaller --clean --noconfirm --onefile --windowed --name JoyBridge-Dance-Lab experiments/android-motion/launcher.py
+          $gui = Start-Process dist/JoyBridge-Dance-Lab.exe -ArgumentList '--smoke-test' -PassThru
+          if (-not $gui.WaitForExit(30000)) { $gui.Kill(); throw 'GUI startup timed out' }
+          if ($gui.ExitCode -ne 0) { throw 'GUI startup failed' }
           Copy-Item experiments/android-motion/README.md dist/Motion-Lab-Readme.md
           Copy-Item experiments/android-motion/Start-Motion-Bridge.cmd dist/
           Copy-Item LICENSE dist/LICENSE.txt
@@ -36,8 +40,30 @@ jobs:
           name: JoyBridge-Android-Motion-Lab-Windows-x64-unsigned
           if-no-files-found: error
           path: |
+            dist/JoyBridge-Dance-Lab.exe
             dist/JoyBridge-Motion-Lab.exe
             dist/Motion-Lab-Readme.md
             dist/Start-Motion-Bridge.cmd
             dist/LICENSE.txt
             dist/LICENSE-SDL.txt
+
+  installer:
+    needs: windows-lab
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/download-artifact@v4
+        with:
+          name: JoyBridge-Android-Motion-Lab-Windows-x64-unsigned
+          path: dist
+      - name: Build beginner installer
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y nsis
+          cp experiments/android-motion/setup.nsi setup-dance.nsi
+          makensis -V2 setup-dance.nsi
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: JoyBridge-Dance-Lab-Setup-unsigned
+          if-no-files-found: error
+          path: JoyBridge-Dance-Lab-Setup.exe

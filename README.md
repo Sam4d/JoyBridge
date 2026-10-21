@@ -18,7 +18,7 @@ The four-entry device array is **not four-player support**. All detected control
 
 ## Android motion experiment
 
-A separate [Android Motion Lab](experiments/android-motion/README.md) now implements a Joy-Con sensor-to-emulator bridge. Its transport and validation tests pass; real Windows hardware, Android sensor delivery, and Just Dance Now compatibility remain **unverified**. It is separate from the keyboard/mouse installer. Download its Windows executable from the **Build Android motion lab** Actions workflow after a successful run.
+A separate [Android Motion Lab](experiments/android-motion/README.md) now implements a Joy-Con sensor-to-emulator bridge. Its transport and validation tests pass; real Windows hardware, Android sensor delivery, and Just Dance Now compatibility remain **unverified**. It is separate from the keyboard/mouse installer. The **Dance Lab** guided installer now prepares Android without Android Studio, opens Bluetooth settings, starts the virtual phone and controls the bridge. Download its installer from the **Build Android motion lab** Actions workflow after a successful run. Runtime boot and game compatibility still need hardware validation.
 
 ## Product plan
 
