@@ -23,7 +23,7 @@ class Gaming:
         self.running = False
         self.selected_id = None
         root.title('JoyBridge • PC Gaming')
-        root.geometry('780x630')
+        root.geometry('780x790')
         root.resizable(False, False)
         root.configure(bg='#101827')
         style = ttk.Style(); style.theme_use('clam')
@@ -168,12 +168,22 @@ class Gaming:
 
 
 if __name__=='__main__':
+    mutex = None
+    if os.name == 'nt' and '--screenshot' not in sys.argv:
+        kernel=C.WinDLL('kernel32',use_last_error=True)
+        kernel.CreateMutexW.restype=C.c_void_p
+        kernel.CreateMutexW.argtypes=[C.c_void_p,C.c_int,C.c_wchar_p]
+        mutex=kernel.CreateMutexW(None,False,'Local\\JoyBridge-PC-Gaming')
+        if C.get_last_error()==183:
+            messagebox.showinfo('JoyBridge','JoyBridge PC Gaming is already running.')
+            raise SystemExit(0)
     root=tk.Tk();app=Gaming(root,demo='--demo' in sys.argv or '--screenshot' in sys.argv)
     if '--screenshot' in sys.argv:
         def capture():
             from PIL import ImageGrab
             root.update()
-            ImageGrab.grab((root.winfo_rootx(),root.winfo_rooty(),root.winfo_rootx()+780,root.winfo_rooty()+630)).save('gaming-ui.png')
+            ImageGrab.grab((root.winfo_rootx(),root.winfo_rooty(),root.winfo_rootx()+780,root.winfo_rooty()+790)).save('gaming-ui.png')
             root.destroy()
         root.after(1500,capture)
     root.mainloop()
+
