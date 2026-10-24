@@ -87,7 +87,7 @@ def transform(values, mapping):
 
 
 class SDL:
-    def __init__(self, dll):
+    def __init__(self, dll, combine=False):
         self.lib = C.CDLL(str(Path(dll).resolve()))
         signatures = {
             'SDL_SetHint': (C.c_int, [C.c_char_p, C.c_char_p]),
@@ -112,8 +112,9 @@ class SDL:
             fn.restype, fn.argtypes = result, args
         for name, value in {
             'SDL_JOYSTICK_HIDAPI': '1', 'SDL_JOYSTICK_HIDAPI_JOY_CONS': '1',
-            'SDL_JOYSTICK_HIDAPI_COMBINE_JOY_CONS': '0',
+            'SDL_JOYSTICK_HIDAPI_COMBINE_JOY_CONS': '1' if combine else '0',
             'SDL_JOYSTICK_ALLOW_BACKGROUND_EVENTS': '1',
+            'SDL_GAMECONTROLLER_USE_BUTTON_LABELS': '0',
         }.items():
             self.lib.SDL_SetHint(name.encode(), value.encode())
         if self.lib.SDL_Init(0x00002000 | 0x00004000) != 0:
