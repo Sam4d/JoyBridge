@@ -8,7 +8,13 @@ The current focus is PC gaming. Android and dance experiments are historical and
 
 ## Download
 
-Open [Build PC gaming app](https://github.com/Sam4d/JoyBridge/actions/workflows/gaming.yml), select a successful run, and download **JoyBridge-Gaming-Setup**. Extract the ZIP and run **JoyBridge-Gaming-Setup.exe**. A portable **JoyBridge-Gaming.exe** is available in the other artifact. No Python or Android installation is needed. Builds are unsigned; Actions artifacts require GitHub sign-in and expire.
+**[Download the installer ZIP from GitHub](https://github.com/Sam4d/JoyBridge/actions/runs/40126119451/artifacts/12573341776)**
+
+Extract the ZIP and double-click **JoyBridge-Gaming-Setup.exe**. GitHub may require sign-in for Actions downloads.
+
+[Portable executable ZIP](https://github.com/Sam4d/JoyBridge/actions/runs/40126119451/artifacts/12572877163) is also available; its executable is inside the `dist` folder. No Python or Android installation is needed. Builds are unsigned and experimental. Actions artifacts expire; a permanent release with direct EXE downloads is not published yet.
+
+For newer builds, see [Build PC gaming app](https://github.com/Sam4d/JoyBridge/actions/workflows/gaming.yml).
 
 ## Connect and play
 
